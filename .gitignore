@@ -1,0 +1,9 @@
+# Windows junk
+Thumbs.db
+desktop.ini
+
+# Never commit keys
+*.pem
+id_*
+flinginator
+flinginator.pub

@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Flinginator 3000</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;700&family=Barlow+Condensed:wght@600;800&family=Saira+Stencil+One&display=swap">
+<style>
+/* Layout: camo field with dark scrim; hero = wordmark + live "Fling-O-Meter" demo; then a bone-paper catalog grid. Single committed look (camo world). */
+:root{
+  --bark:#1c1e13; --olive:#3a3d24; --moss:#565a33; --khaki:#7d7449;
+  --bone:#f1e9d2; --bone-dim:#c9bf9f; --ink:#22231a;
+  --blaze:#ff6a13; --blaze-deep:#c94a00; --corn:#f4c430;
+  --scrim:rgba(24,26,16,.78);
+  --f-display:"Anton","Impact","Arial Narrow Bold",sans-serif;
+  --f-stencil:"Saira Stencil One","Stencil","Impact",sans-serif;
+  --f-body:"Barlow","Helvetica Neue",Arial,sans-serif;
+  --f-label:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+section[id]{scroll-margin-top:84px}
+body{background:var(--olive) var(--camo,none) repeat;background-size:512px 512px;color:var(--bone);font:400 17px/1.55 var(--f-body);margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:20px}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--corn);outline-offset:3px}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bark);border-bottom:4px solid var(--blaze)}
+.nav .wrap{display:flex;align-items:center;gap:20px;padding-block:10px;flex-wrap:wrap}
+.nav .mark{font:28px/1 var(--f-stencil);letter-spacing:.02em;text-decoration:none;white-space:nowrap}
+.nav .mark b{color:var(--blaze);font-weight:400}
+.nav ul{display:flex;gap:22px;list-style:none;margin:0 0 0 auto;padding:0;font:600 16px/1 var(--f-label);letter-spacing:.08em;text-transform:uppercase}
+.nav ul a{text-decoration:none;color:var(--bone-dim)}
+.nav ul a:hover{color:var(--bone)}
+.btn{display:inline-flex;align-items:center;gap:.5em;font:800 18px/1 var(--f-label);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border:0;cursor:pointer;padding:14px 22px;background:var(--blaze);color:var(--bark);box-shadow:4px 4px 0 var(--bark);transition:transform .08s,box-shadow .08s}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--bark)}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--bark)}
+.btn.sm{padding:10px 16px;font-size:16px;box-shadow:3px 3px 0 #000}
+.btn.ghost{background:transparent;color:var(--bone);box-shadow:inset 0 0 0 3px var(--bone)}
+.btn.ghost:hover{box-shadow:inset 0 0 0 3px var(--blaze);color:var(--blaze);transform:none}
+
+/* hero */
+.hero{background:var(--scrim);padding-block:56px 64px;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.hero-copy{min-width:0;position:relative}
+.stamp{display:inline-block;font:800 15px/1 var(--f-label);letter-spacing:.18em;text-transform:uppercase;color:var(--blaze);border:2px solid var(--blaze);padding:7px 10px;transform:rotate(-2deg)}
+h1{margin:22px 0 0;line-height:.86}
+h1 .w1{display:block;font:clamp(56px,9.4vw,124px)/.86 var(--f-stencil);letter-spacing:-.01em;color:var(--bone);text-shadow:5px 5px 0 var(--bark)}
+h1 .w2{display:inline-block;margin-top:10px;font:clamp(54px,8.4vw,112px)/.9 var(--f-display);font-style:italic;background:var(--blaze);color:var(--bark);padding:4px 22px 0 14px;transform:skewX(-10deg);box-shadow:6px 6px 0 var(--bark)}
+.tag{font:clamp(28px,3.6vw,42px)/1.02 var(--f-display);text-transform:uppercase;margin:30px 0 14px;text-wrap:balance;max-width:16ch}
+.tag em{font-style:normal;color:var(--corn)}
+.lede{max-width:48ch;color:var(--bone-dim);margin:0 0 28px;font-size:19px}
+.lede strong{color:var(--bone)}
+.cta{display:flex;gap:14px;flex-wrap:wrap}
+.shipnote{margin:18px 0 0;font:600 14px/1.4 var(--f-label);letter-spacing:.08em;text-transform:uppercase;color:var(--bone-dim)}
+.sticker{position:absolute;z-index:2;right:-22px;top:-52px;width:132px;aspect-ratio:1;max-width:100%;background:var(--corn);color:var(--bark);display:grid;place-content:center;text-align:center;transform:rotate(12deg);
+  clip-path:polygon(50% 0,61% 12%,76% 6%,79% 22%,95% 25%,89% 40%,100% 50%,89% 60%,95% 75%,79% 78%,76% 94%,61% 88%,50% 100%,39% 88%,24% 94%,21% 78%,5% 75%,11% 60%,0 50%,11% 40%,5% 25%,21% 22%,24% 6%,39% 12%)}
+.sticker small{font:800 13px/1 var(--f-label);letter-spacing:.1em}
+.sticker span{font:34px/1 var(--f-display)}
+.sticker .ship{font-size:11px;margin-top:3px}
+
+/* fling-o-meter */
+.meter{position:relative;background:var(--bark);border:3px solid var(--khaki);box-shadow:10px 10px 0 rgba(0,0,0,.45);min-width:0}
+.meter-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;background:var(--khaki);color:var(--bark);font:800 17px/1 var(--f-label);letter-spacing:.14em;text-transform:uppercase}
+.meter-head i{font-style:normal;font-size:13px;letter-spacing:.08em;opacity:.8}
+canvas{display:block;width:100%;height:340px}
+.meter-ctl{display:grid;grid-template-columns:1fr auto;gap:12px 16px;align-items:center;padding:14px;border-top:2px solid var(--olive)}
+.meter-ctl label{font:800 14px/1 var(--f-label);letter-spacing:.14em;text-transform:uppercase;color:var(--bone-dim);display:flex;justify-content:space-between;gap:8px;grid-column:1/-1}
+.meter-ctl output{color:var(--corn)}
+input[type=range]{width:100%;accent-color:var(--blaze);height:28px;margin:0}
+.meter-ctl .btn{white-space:nowrap}
+.meter-note{margin:0;padding:0 14px 14px;font:500 14px/1.4 var(--f-body);color:var(--bone-dim)}
+
+/* tape */
+.tape-box{overflow:hidden;padding-block:10px;margin-block:-10px;position:relative;z-index:1}
+.tape{background:var(--blaze);color:var(--bark);font:800 20px/1 var(--f-label);letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;overflow:hidden;padding-block:12px;transform:rotate(-1.2deg) scale(1.03);border-block:3px solid var(--bark)}
+.tape span{display:inline-block;padding-left:20px}
+
+/* features */
+.features{padding-block:76px 90px}
+.sec-head{display:flex;align-items:end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:34px}
+h2{margin:0;font:clamp(40px,6vw,72px)/.92 var(--f-display);text-transform:uppercase;text-shadow:4px 4px 0 var(--bark);text-wrap:balance}
+h2 small{display:block;font:800 18px/1 var(--f-label);letter-spacing:.2em;color:var(--blaze);text-shadow:none;margin-bottom:10px}
+.sec-head p{margin:0;max-width:36ch;background:var(--bark);padding:12px 14px;color:var(--bone-dim);font-size:16px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.card{background:var(--bone);color:var(--ink);padding:0 22px 24px;position:relative;box-shadow:6px 6px 0 var(--bark)}
+.card .num{display:inline-block;background:var(--bark);color:var(--blaze);font:22px/1 var(--f-stencil);padding:10px 12px 8px;margin-bottom:16px}
+.card h3{margin:0 0 8px;font:30px/1 var(--f-display);text-transform:uppercase;letter-spacing:.01em}
+.card p{margin:0;font-size:16.5px;line-height:1.5;color:#3d3c2c}
+.card .fine{display:block;margin-top:14px;font:600 14px/1.3 var(--f-label);letter-spacing:.06em;text-transform:uppercase;color:var(--blaze-deep)}
+
+/* placeholder marker: anything still to be filled in */
+.tbd{background:var(--corn);color:var(--bark);font-weight:700;padding:0 4px;white-space:normal}
+
+.mail{color:var(--corn);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.mail:hover{color:var(--blaze)}
+
+/* faq */
+.faq{background:var(--scrim);padding-block:76px 90px}
+.faq-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 22px;align-items:start}
+.faq-col{display:grid;gap:16px;min-width:0}
+details{background:var(--bark);border:2px solid var(--moss)}
+details[open]{border-color:var(--khaki)}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 18px;font:23px/1.1 var(--f-display);text-transform:uppercase;letter-spacing:.01em}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";flex:none;width:30px;height:30px;display:grid;place-items:center;background:var(--blaze);color:var(--bark);font:26px/1 var(--f-display)}
+details[open] summary::after{content:"\2013"}
+summary:hover{color:var(--corn)}
+.ans{padding:0 18px 18px;color:var(--bone-dim);font-size:16.5px}
+.ans p{margin:0 0 10px}.ans p:last-child{margin:0}
+.ans strong{color:var(--bone)}
+.warn{border-color:var(--blaze)}
+.warn summary{color:var(--blaze)}
+
+/* footer */
+.foot{background:var(--bark);border-top:6px solid var(--blaze);padding-block:52px 34px;position:relative;overflow:hidden}
+.foot-top{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:36px;align-items:start}
+.foot .mark{font:34px/1 var(--f-stencil);text-decoration:none;display:inline-block;margin-bottom:12px}
+.foot .mark b{color:var(--blaze);font-weight:400}
+.foot p{margin:0 0 8px;color:var(--bone-dim);font-size:15.5px}
+.foot h4{margin:0 0 12px;font:800 15px/1 var(--f-label);letter-spacing:.18em;text-transform:uppercase;color:var(--blaze)}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font:600 17px/1.2 var(--f-label);letter-spacing:.06em;text-transform:uppercase}
+.foot ul a{text-decoration:none;color:var(--bone)}
+.foot ul a:hover{color:var(--corn)}
+.nine{display:inline-grid;place-content:center;text-align:center;width:150px;aspect-ratio:1;max-width:100%;background:var(--blaze);color:var(--bark);transform:rotate(-8deg);margin-top:6px;
+  clip-path:polygon(50% 0,61% 12%,76% 6%,79% 22%,95% 25%,89% 40%,100% 50%,89% 60%,95% 75%,79% 78%,76% 94%,61% 88%,50% 100%,39% 88%,24% 94%,21% 78%,5% 75%,11% 60%,0 50%,11% 40%,5% 25%,21% 22%,24% 6%,39% 12%)}
+.nine b{font:30px/.95 var(--f-display);font-style:italic}
+.nine small{font:800 11px/1.15 var(--f-label);letter-spacing:.08em;text-transform:uppercase;padding-inline:22px}
+.foot-bot{margin-top:40px;padding-top:18px;border-top:1px solid var(--olive);display:flex;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;font:600 14px/1.4 var(--f-label);letter-spacing:.08em;text-transform:uppercase;color:var(--khaki)}
+
+@media (max-width:900px){
+  .hero .wrap{grid-template-columns:1fr}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .nav ul{display:none}
+  .faq-grid{grid-template-columns:1fr}
+  .foot-top{grid-template-columns:1fr 1fr}
+  .foot-brand{grid-column:1/-1}
+  .nav .btn{margin-left:auto}
+}
+@media (max-width:600px){
+  .grid{grid-template-columns:1fr}
+  .sticker{width:96px;top:-40px;right:-6px}
+  .sticker span{font-size:27px}
+  canvas{height:290px}
+  .nav .mark{font-size:21px}
+  .nav .wrap{flex-wrap:nowrap;gap:10px}
+  .nav .btn.sm{font-size:14px;padding:9px 11px;white-space:nowrap}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="mark" href="#top">FLINGINATOR <b>3000</b></a>
+    <ul>
+      <li><a href="#what">What it does</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#specs">Specs</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="btn sm" href="#reserve">Reserve · $74.99</a>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="stamp">Limited first run // Deer season 2026</span>
+      <h1><span class="w1">FLINGINATOR</span><span class="w2">3000</span></h1>
+      <p class="tag">Your feeder's been <em>holding out</em> on you.</p>
+      <p class="lede">A remote speed controller for truck- and ATV-mounted spin feeders. <strong>Hold the button and it slings corn.</strong> Crank it up to throw wide, back it down to drop it tight by the trail. It runs on the 20V tool pack already riding in your truck.</p>
+      <div class="cta">
+        <a class="btn" href="#reserve">Reserve yours</a>
+        <a class="btn ghost" href="#what">See what it does</a>
+      </div>
+      <p class="shipnote">US orders only for the first run · Flat-rate shipping added at checkout · Ships by [DATE TBD]</p>
+    </div>
+
+    <div class="meter" aria-label="Fling-O-Meter demo">
+<div class="sticker" aria-hidden="true"><small>PRE-ORDER</small><span>$74.99</span><small class="ship">+ shipping</small></div>
+      <div class="meter-head">Fling-O-Meter <i>Top view · try it</i></div>
+      <canvas id="fling" role="img" aria-label="Top-down view of a truck bed feeder throwing corn. Spread widens as speed goes up."></canvas>
+      <div class="meter-ctl">
+        <label for="speed">Speed <output id="readout" for="speed">Good spread</output></label>
+        <input type="range" id="speed" min="1" max="10" value="5">
+        <button class="btn sm" id="send" type="button">Hold: full send</button>
+      </div>
+      <p class="meter-note">Same moves as the real remote: tap up or down to change the spread, and hold for full send.</p>
+    </div>
+  </div>
+</section>
+
+<div class="tape-box" aria-hidden="true"><div class="tape"><span>Fling feed, not excuses ✕ Runs on your 20V pack ✕ Limited first run ✕ Fling feed, not excuses ✕ Runs on your 20V pack ✕ Limited first run ✕</span></div></div>
+
+<section class="features" id="what">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><small>Field manual</small>What it does<br>(besides fling)</h2>
+      <p>Your feeder already has a motor. The Flinginator 3000 gives you control of it from the cab.</p>
+    </div>
+    <div class="grid">
+      <article class="card">
+        <span class="num">01</span>
+        <h3>Hold. Fling. Let go.</h3>
+        <p>Hold the remote button and the spinner runs. Let go and it stops. You don't have to remember to switch anything off.</p>
+        <span class="fine">Auto-stop after 30 seconds of run time</span>
+      </article>
+      <article class="card">
+        <span class="num">02</span>
+        <h3>Dial in the spread</h3>
+        <p>While you're holding the remote, tap up to throw wider or down to drop it closer. It remembers your last setting for the next run.</p>
+        <span class="fine">Saved even with the power off</span>
+      </article>
+      <article class="card">
+        <span class="num">03</span>
+        <h3>Full send</h3>
+        <p>Double-tap and hold to run the spinner wide open. Use it for the big food plot.</p>
+        <span class="fine">Drops back to your setting on release</span>
+      </article>
+      <article class="card">
+        <span class="num">04</span>
+        <h3>Runs on your 20V pack</h3>
+        <p>Snap in the DeWalt or Milwaukee 20V battery you already own. There's no special battery to buy and no charger to keep track of.</p>
+        <span class="fine">Pick your brand's dock at checkout</span>
+      </article>
+      <article class="card">
+        <span class="num">05</span>
+        <h3>Leave it in all season</h3>
+        <p>Off really means off, so the pack can stay in from opening day to the last hunt. If you forget it on, it shuts itself off.</p>
+        <span class="fine">Auto power-off after 14 hours idle</span>
+      </article>
+      <article class="card">
+        <span class="num">06</span>
+        <h3>Lights before daylight</h3>
+        <p>Filling the hopper in the dark? Press any button and the LED strips light up the hopper for 45 seconds.</p>
+        <span class="fine">Outdoor-rated, fully molded LEDs</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><small>Before you ask</small>Questions,<br>straight answers</h2>
+      <p>Don't see yours? Email us and a real person will answer: <a class="mail" href="mailto:sales@flinginator.com">sales@flinginator.com</a></p>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-col">
+        <details open>
+          <summary>Will it work on my feeder?</summary>
+          <div class="ans">
+            <p>It's made for truck- and ATV-mounted spin feeders with a <strong>12-volt DC spinner motor</strong>. It connects to the spinner motor's two wires.</p>
+            <p>Checked so far: <span class="tbd">[FEEDER BRANDS / MODELS]</span></p>
+          </div>
+        </details>
+        <details>
+          <summary>Which batteries does it take?</summary>
+          <div class="ans">
+            <p><strong>DeWalt 20V MAX or Milwaukee M18.</strong> Pick your brand at checkout and we ship the matching dock. Use any pack you already own.</p>
+          </div>
+        </details>
+        <details>
+          <summary>How long does a battery last?</summary>
+          <div class="ans">
+            <p>The spinner only runs while you hold the button, so a pack goes a long way. <span class="tbd">[RUNTIME / RUNS PER PACK, MEASURED]</span></p>
+          </div>
+        </details>
+        <details>
+          <summary>Can I leave the battery in all season?</summary>
+          <div class="ans">
+            <p>Yes. When it's off, it draws next to nothing, so it won't drain your pack sitting in the truck. If you forget to turn it off, it shuts itself off after <span class="tbd">[14 HOURS: VERIFY ON BENCH]</span> with no activity.</p>
+          </div>
+        </details>
+        <details>
+          <summary>How far does the remote reach?</summary>
+          <div class="ans">
+            <p>Far enough to run it from the cab. <span class="tbd">[MEASURED RANGE]</span></p>
+          </div>
+        </details>
+        <details>
+          <summary>Can it take the weather?</summary>
+          <div class="ans">
+            <p><span class="tbd">[CONFIRM: rain in the truck bed OK? Don't pressure-wash or submerge?]</span> The LED strips are outdoor-rated and fully molded.</p>
+          </div>
+        </details>
+      </div>
+      <div class="faq-col">
+        <details class="warn" open>
+          <summary>Is it safe?</summary>
+          <div class="ans">
+            <p><strong>Treat it like a running mower.</strong> At full speed, the Flinginator 3000 throws corn hard enough to hurt. It doesn't care what's in the way, so make sure nothing is.</p>
+            <p>Keep people, dogs and windshields clear of the spinner while it's running. Turn the power off before you reach into the hopper or the spinner.</p>
+          </div>
+        </details>
+        <details>
+          <summary>When will mine ship?</summary>
+          <div class="ans">
+            <p><strong>Batch 1 is 20 units</strong>, shipping by <span class="tbd">[SHIP-BY DATE]</span>. Once those are gone, Batch 2 opens for pre-order with its own ship date.</p>
+            <p>If we can't make a date we gave you, we'll email you and you can choose to wait or get a full refund.</p>
+          </div>
+        </details>
+        <details>
+          <summary>What does shipping cost?</summary>
+          <div class="ans">
+            <p>Flat <span class="tbd">[$ SHIPPING]</span> anywhere in the US, added at checkout. The first run ships to US addresses only.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Warranty and returns?</summary>
+          <div class="ans">
+            <p><span class="tbd">[RETURN WINDOW + WARRANTY TERMS]</span></p>
+          </div>
+        </details>
+        <details>
+          <summary>Is feeding deer legal where I hunt?</summary>
+          <div class="ans">
+            <p>Depends where you are. Some states ban baiting or feeding during season, and some ban it all year. <strong>Check your state's wildlife regulations before you spread anything.</strong> That's on you, not on the Flinginator.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Who makes this thing?</summary>
+          <div class="ans">
+            <p>Designed and built in Houston, field-tested on a working hunting ranch in Uvalde, Texas. Every unit is assembled and tested by hand before it ships.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="mark" href="#top">FLINGINATOR <b>3000</b></a>
+        <p>Remote speed control for truck and ATV spin feeders. Runs on your 20V tool pack.</p>
+        <p>Questions: <a class="mail" href="mailto:sales@flinginator.com">sales@flinginator.com</a></p>
+      </div>
+      <div>
+        <h4>The goods</h4>
+        <ul>
+          <li><a href="#what">What it does</a></li>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#specs">Specs</a></li>
+          <li><a href="#reserve">Reserve yours</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="nine" aria-label="Flinginator 9000, currently in development"><b>9000</b><small>In development. Possibly illegal.</small></div>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 <span class="tbd">[LLC NAME]</span> · Made in Texas</span>
+      <span>Shipping &amp; returns <span class="tbd">[PAGE]</span> · Privacy <span class="tbd">[PAGE]</span> · Terms <span class="tbd">[PAGE]</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ---- procedural woodland camo tile (seeded, tileable) ----
+(function(){
+  try{
+    const S=512,c=document.createElement('canvas');c.width=c.height=S;const x=c.getContext('2d');
+    let s=3000;const r=()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
+    x.fillStyle='#7d7449';x.fillRect(0,0,S,S);
+    const layers=[['#565a33',26,46],['#3a3d24',22,40],['#1c1e13',16,26]];
+    for(const [col,n,size] of layers){
+      x.fillStyle=col;
+      for(let i=0;i<n;i++){
+        const cx=r()*S,cy=r()*S,ang=r()*Math.PI,parts=5+(r()*6|0);
+        for(let p=0;p<parts;p++){
+          const d=(r()-.5)*size*2.6,ox=cx+Math.cos(ang)*d+(r()-.5)*size*.8,oy=cy+Math.sin(ang)*d+(r()-.5)*size*.8,rad=size*(.35+r()*.55);
+          for(const dx of[-S,0,S])for(const dy of[-S,0,S]){x.beginPath();x.ellipse(ox+dx,oy+dy,rad,rad*(.6+r()*.4),ang,0,7);x.fill();}
+        }
+      }
+    }
+    document.body.style.setProperty('--camo','url('+c.toDataURL()+')');
+  }catch(e){}
+})();
+
+// ---- Fling-O-Meter ----
+(function(){
+  const cv=document.getElementById('fling'),ctx=cv.getContext('2d');
+  const slider=document.getElementById('speed'),out=document.getElementById('readout'),send=document.getElementById('send');
+  const still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let W,H,dpr,cx,cy,R,speed=+slider.value,held=false,spin=0,flying=[],landed=[];
+  const words=v=>v>=10?'Full send':v>=8?'Wide open':v>=4?'Good spread':'Drop it close';
+  const cur=()=>held?10:speed;
+  function size(){dpr=Math.min(devicePixelRatio||1,2);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);cx=W/2;cy=H*.36;R=Math.min(W*.47,H*.62);}
+  function emit(n){
+    for(let i=0;i<n;i++){
+      let a;do{a=Math.random()*Math.PI*2}while(Math.abs(Math.atan2(Math.sin(a+Math.PI/2),Math.cos(a+Math.PI/2)))<.62);
+      const v=cur(),dist=R*(.22+.78*v/10)*(.5+.5*Math.random());
+      flying.push({a,dist,t:0,dur:380+Math.random()*260});
+    }
+  }
+  function scatter(){landed=[];const v=cur();for(let i=0;i<260;i++){let a;do{a=Math.random()*Math.PI*2}while(Math.abs(Math.atan2(Math.sin(a+Math.PI/2),Math.cos(a+Math.PI/2)))<.62);const d=R*(.22+.78*v/10)*(.5+.5*Math.random());landed.push({x:cx+Math.cos(a)*d,y:cy+Math.sin(a)*d,al:1,rot:a});}}
+  function kernel(x,y,rot,al){ctx.globalAlpha=al;ctx.fillStyle='#f4c430';ctx.beginPath();ctx.ellipse(x,y,2.6,1.8,rot,0,7);ctx.fill();ctx.globalAlpha=1;}
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    // range rings
+    ctx.strokeStyle='rgba(241,233,210,.16)';ctx.lineWidth=1;ctx.setLineDash([4,6]);
+    ctx.font='600 12px "Barlow Condensed",Arial Narrow,sans-serif';ctx.fillStyle='rgba(241,233,210,.45)';ctx.textAlign='left';
+    [['CLOSE',.33],['MID',.66],['WIDE',1]].forEach(([t,f])=>{ctx.beginPath();ctx.arc(cx,cy,R*f,0,7);ctx.stroke();ctx.fillText(t,cx+R*f*.72+4,cy+R*f*.70);});
+    ctx.setLineDash([]);
+    landed.forEach(k=>kernel(k.x,k.y,k.rot,k.al*.85));
+    flying.forEach(k=>{const e=1-Math.pow(1-k.t,3),d=k.dist*e;kernel(cx+Math.cos(k.a)*d,cy+Math.sin(k.a)*d,k.a,1);});
+    // truck bed (pointing up, off-canvas)
+    const bw=Math.min(150,W*.36);
+    ctx.fillStyle='#3a3d24';ctx.fillRect(cx-bw/2,-10,bw,cy-14);
+    ctx.strokeStyle='#7d7449';ctx.lineWidth=3;ctx.strokeRect(cx-bw/2,-10,bw,cy-14);
+    ctx.fillStyle='#565a33';ctx.fillRect(cx-bw/2-6,cy-30,bw+12,10); // tailgate
+    // spinner
+    ctx.fillStyle='#1c1e13';ctx.beginPath();ctx.arc(cx,cy,17,0,7);ctx.fill();
+    ctx.strokeStyle='#ff6a13';ctx.lineWidth=3;ctx.beginPath();ctx.arc(cx,cy,17,0,7);ctx.stroke();
+    ctx.save();ctx.translate(cx,cy);ctx.rotate(spin);ctx.strokeStyle='#f1e9d2';ctx.lineWidth=2.5;
+    for(let i=0;i<4;i++){ctx.rotate(Math.PI/2);ctx.beginPath();ctx.moveTo(3,0);ctx.lineTo(14,0);ctx.stroke();}
+    ctx.restore();
+  }
+  let last=performance.now(),acc=0;
+  function tick(now){
+    const dt=Math.min(now-last,50);last=now;const v=cur();
+    spin+=dt*.004*v;acc+=dt*v*.05;const n=acc|0;acc-=n;emit(n);
+    flying=flying.filter(k=>{k.t+=dt/k.dur;if(k.t>=1){landed.push({x:cx+Math.cos(k.a)*k.dist,y:cy+Math.sin(k.a)*k.dist,al:1,rot:k.a});return false}return true});
+    landed.forEach(k=>k.al-=dt*.00055);landed=landed.filter(k=>k.al>0);if(landed.length>700)landed.splice(0,landed.length-700);
+    draw();requestAnimationFrame(tick);
+  }
+  function setSpeed(){speed=+slider.value;out.textContent=words(cur());if(still){scatter();draw();}}
+  slider.addEventListener('input',setSpeed);
+  const on=e=>{e.preventDefault();held=true;out.textContent=words(10);if(still){scatter();draw();}};
+  const off=()=>{if(!held)return;held=false;setSpeed();};
+  send.addEventListener('pointerdown',on);['pointerup','pointerleave','pointercancel'].forEach(t=>send.addEventListener(t,off));
+  send.addEventListener('keydown',e=>{if((e.key===' '||e.key==='Enter')&&!e.repeat)on(e);});
+  send.addEventListener('keyup',e=>{if(e.key===' '||e.key==='Enter')off();});
+  addEventListener('resize',()=>{size();if(still){scatter();draw();}});
+  size();setSpeed();
+  if(still){scatter();draw();}else{scatter();requestAnimationFrame(t=>{last=t;tick(t)});}
+})();
+</script>
+
+</body>
+</html>
